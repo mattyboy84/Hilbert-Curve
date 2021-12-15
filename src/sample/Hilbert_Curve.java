@@ -40,14 +40,13 @@ public class Hilbert_Curve {
         this.topRight = new quadrant(width, height, width / scale, 0, order, quadrants, n, new Vecc2f(1, 0), depth, group, scale);
         //
 
-        this.bottomLeft.move();
-        this.bottomRight.move();
-        this.topLeft.move();
-        this.topRight.move();
+        this.bottomLeft.move(group);
+        this.bottomRight.move(group);
+        this.topLeft.move(group);
+        this.topRight.move(group);
         //
         this.topLeft.rotate(270, (int) (this.topLeft.center.x), (int) (this.topLeft.center.y));
         this.topRight.rotate(90, (int) (this.topRight.center.x), (int) (this.topRight.center.y));
-
 
     }
 }

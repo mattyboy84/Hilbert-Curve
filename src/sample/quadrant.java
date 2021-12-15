@@ -21,21 +21,20 @@ public class quadrant {
     Line right;
     //
     Rectangle bottomCurve, leftCurve, rightCurve;
-    //
-    String invisLineS;
+    Rectangle leftConnect,middleConnect,rightConnect;
     //
     int order;
     int depth;
     int curveORDER;
+    int xGap,yGap;
 
     int WIDTH_HEIGHT = 2;
 
 
     public quadrant(int width, int height, int positionX, int positionY, int order, int quadrants, int n, Vecc2f smallPos, int depth, Group group, int scale) {
 
-this.curveORDER=order;
+        this.curveORDER=order;
         this.position = new Vecc2f(positionX, positionY);
-
 
         if (depth < order) {
             this.leaf = false;
@@ -59,8 +58,8 @@ this.curveORDER=order;
             this.bottom = new Line(positionX, positionY + (height / scale), positionX + (height / scale), positionY + (height / scale));
             //System.out.println(this.center);
             //
-            int xGap = (int) ((width / scale) * 0.15);
-            int yGap = (int) ((height / scale) * 0.15);
+            xGap = (int) ((width / scale) * 0.15);
+            yGap = (int) ((height / scale) * 0.15);
             //System.out.println(xGap);
             this.center = new Vecc2f(this.position.x + (width / (scale * 2)), this.position.y + (height / (scale * 2)));
 
@@ -88,7 +87,7 @@ this.curveORDER=order;
         this.depth = depth;
     }
 
-    public void move() {
+    public void move(Group group) {
         //System.out.println(depth);
         //if (!this.topLeft.leaf) {
         //    this.topLeft.move();
@@ -107,14 +106,13 @@ this.curveORDER=order;
             this.topLeft.rotate(270, (int) (this.topLeft.center.x), (int) (this.topLeft.center.y));
             this.topRight.rotate(90, (int) (this.topRight.center.x), (int) (this.topRight.center.y));
         }else {
-            this.topLeft.move();
-            this.topRight.move();
-            this.bottomLeft.move();
-            this.bottomRight.move();
+            this.topLeft.move(group);
+            this.topRight.move(group);
+            this.bottomLeft.move(group);
+            this.bottomRight.move(group);
         }
         //System.out.println(depth  +" " + order);
         if (depth+1==order){
-            System.out.println("a");
             this.topLeft.rotate(270, (int) (this.topLeft.center.x), (int) (this.topLeft.center.y));
             this.topRight.rotate(90, (int) (this.topRight.center.x), (int) (this.topRight.center.y));
         }

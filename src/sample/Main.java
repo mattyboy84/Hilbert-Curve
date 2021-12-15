@@ -3,11 +3,13 @@ package sample;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Transform;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -15,9 +17,14 @@ import java.util.Arrays;
 
 public class Main extends Application {
 
-    int width = 1080;
-    int height = 1080;
-    int order = 4;
+    static Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+
+    //int width = 1080;
+    //int height = 1080;
+    int width = (int) screenBounds.getHeight();
+    int height =(int) screenBounds.getHeight();
+
+    int order = 3;
     int quadrants = (int) Math.pow(2, order);
     int N = quadrants * quadrants;
 
@@ -32,8 +39,8 @@ public class Main extends Application {
         int scale = 2;
         int depth = 1;
         curve = new Hilbert_Curve(width, height, order, quadrants, N, group, scene, depth, scale);
-        //System.out.println("hi");
 
+        //System.out.println(curve.topLeft.topLeft.topLeft.top.getBoundsInParent());
 
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
